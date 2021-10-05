@@ -1,15 +1,15 @@
 [package]
-name    = "ffmpeg-sys-next"
-version = "4.4.0-next.1"
 build   = "build.rs"
 links   = "ffmpeg"
+name    = "ffmpeg-sys-next"
+version = "4.4.0-next.1"
 
 authors = ["meh. <meh@schizofreni.co>", "Zhiming Wang <i@zhimingwang.org>"]
 license = "WTFPL"
 
 description = "FFI bindings to FFmpeg"
-repository  = "https://github.com/zmwangx/rust-ffmpeg-sys"
 keywords    = ["audio", "video"]
+repository  = "https://github.com/zmwangx/rust-ffmpeg-sys"
 
 [lib]
 # Disable doctests as a workaround for https://github.com/rust-lang/rust-bindgen/issues/1313
@@ -19,19 +19,26 @@ doctest = false
 libc = "0.2"
 
 [build-dependencies]
-num_cpus   = "1.11"
+bindgen    = { version = "0.57", default-features = false, features = ["runtime"] }
 cc         = "1.0"
+num_cpus   = "1.11"
 pkg-config = "0.3"
-bindgen    = { version = "0.54", default-features = false, features = ["runtime"] }
 
 [target.'cfg(target_env = "msvc")'.build-dependencies]
 vcpkg = "0.2"
 
 [features]
-default  = ["avcodec", "avdevice", "avfilter", "avformat", "swresample", "swscale"]
+default = [
+    "avcodec",
+    "avdevice",
+    "avfilter",
+    "avformat",
+    "swresample",
+    "swscale",
+]
 
-static = []
 build  = ["static"]
+static = []
 
 # licensing
 build-license-gpl      = ["build"]
@@ -49,17 +56,18 @@ build-lib-gnutls  = ["build"]
 build-lib-openssl = ["build"]
 
 # filters
+build-lib-ass        = ["build"]
 build-lib-fontconfig = ["build"]
+build-lib-freebidi   = ["build"]
+build-lib-freetype   = ["build"]
 build-lib-frei0r     = ["build"]
 build-lib-ladspa     = ["build"]
-build-lib-ass        = ["build"]
-build-lib-freetype   = ["build"]
-build-lib-freebidi   = ["build"]
 build-lib-opencv     = ["build"]
 build-lib-vmaf       = ["build"]
 
 # encoders/decoders
 build-lib-aacplus          = ["build"]
+build-lib-avs              = ["build"]
 build-lib-celt             = ["build"]
 build-lib-dav1d            = ["build"]
 build-lib-dcadec           = ["build"]
@@ -90,7 +98,6 @@ build-lib-wavpack          = ["build"]
 build-lib-webp             = ["build"]
 build-lib-x264             = ["build"]
 build-lib-x265             = ["build"]
-build-lib-avs              = ["build"]
 build-lib-xvid             = ["build"]
 
 # protocols
